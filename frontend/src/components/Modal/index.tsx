@@ -39,17 +39,20 @@ const ModalComponent = ({
                     type="text"
                     value={newUser.name}
                     onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-                  />
+                    required
+                 />
                   <Label>Email:</Label>
                   <Input
                     type="email"
                     value={newUser.email}
                     onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                    required
                   />
                   <Label>Telefone:</Label>
                   <Input
-                    type="text"
+                    type="tel"
                     value={newUser.phone}
+                    maxLength={13}
                     onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
                   />
                   <Label>Endereço:</Label>
@@ -57,7 +60,8 @@ const ModalComponent = ({
                     type="text"
                     value={newUser.address}
                     onChange={(e) => setNewUser({ ...newUser, address: e.target.value })}
-                  />
+                    required
+                 />
                   <div style={{ display: 'flex' }}>
                     <Button onClick={handleSave} disabled={loading}>
                       {loading ? 'Salvando...' : 'Salvar'}

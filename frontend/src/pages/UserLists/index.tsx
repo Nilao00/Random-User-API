@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { debounce } from 'lodash';
+import { debounce, set } from 'lodash';
 import UserCard from '../../components/UserCard';
 import { User } from '../../types/User';
 import { useModal } from '../../hooks/useModal';
@@ -37,23 +37,50 @@ const UsersList = () => {
 
     const handleSave = async () => {
         setLoading(true);
+      
         try {
           if (editingUser) {
-            const updatedUser = await updateUser(editingUser.id!, newUser);
-            setUsers((prev) =>
-              prev.map((user) => (user.id === updatedUser.data.id ? updatedUser.data : user))
-            );
+            if(validateFieldsToSend(editingUser)){
+              const updatedUser = await updateUser(editingUser.id!, newUser);
+              setUsers((prev) =>
+                prev.map((user) => (user.id === updatedUser.data.id ? updatedUser.data : user))
+              );
+              handleCloseModal();
+            }
           } else {
-            const createdUser = await createUser(newUser);
-            setUsers((prev) => [...prev, createdUser.data]);
+            if(validateFieldsToSend(newUser)){
+              const createdUser = await createUser(newUser);
+              setUsers((prev) => [...prev, createdUser.data]);
+              handleCloseModal();
+            }
           }
         } catch (error) {
           console.error('Erro ao salvar usuário:', error);
         } finally {
           setLoading(false);
-          handleCloseModal();
         }
     };
+
+    const validateFieldsToSend = (user: User) => {
+       setLoading(false);
+        if(!user?.name){
+         alert("Preencha o nome do usuário");
+
+         return false;
+        }
+        if(!user?.email){
+         alert("Preencha o email do usuário");
+
+         return false;
+        }
+        if(!user?.address){
+         alert("Preencha o endereço do usuário");
+
+         return false;
+        }
+
+        return true;
+    }
 
     const handleFetch = async () => {
         setLoading(true);
