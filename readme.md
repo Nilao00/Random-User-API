@@ -1,5 +1,6 @@
 #Como rodar o projeto backend:
 
+No vscode instalar o plugin Oficina do .NET C# e ter o .NET Core SDK instalado
 docker-compose up -d para rodar o banco de dados
 dotnet ef migrations add InitialCreate para criar a tabela de usuários
 dotnet ef database update para migrar o banco de dados
