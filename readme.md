@@ -13,7 +13,7 @@ POSTGRES_DB=randomuserdb
 POSTGRES_PORT=5432
 POSTGRES_HOST=localhost
 
-documentação swagger: http://localhost:5017/swagger/index.html
+documentação swagger das rotas: http://localhost:5017/swagger/index.html
 
 #Como rodar o projeto frontend:
 
