@@ -40,48 +40,27 @@ const UsersList = () => {
       
         try {
           if (editingUser) {
-            if(validateFieldsToSend(editingUser)){
               const updatedUser = await updateUser(editingUser.id!, newUser);
               setUsers((prev) =>
                 prev.map((user) => (user.id === updatedUser.data.id ? updatedUser.data : user))
               );
-              handleCloseModal();
-            }
+              handleCloseModal();            
           } else {
-            if(validateFieldsToSend(newUser)){
               const createdUser = await createUser(newUser);
               setUsers((prev) => [...prev, createdUser.data]);
-              handleCloseModal();
-            }
+              handleCloseModal();            
           }
         } catch (error) {
+          if(error?.response?.status === 400) {
+            alert(error?.response?.data?.message);            
+          }
           console.error('Erro ao salvar usuário:', error);
         } finally {
           setLoading(false);
         }
     };
 
-    const validateFieldsToSend = (user: User) => {
-       setLoading(false);
-        if(!user?.name){
-         alert("Preencha o nome do usuário");
-
-         return false;
-        }
-        if(!user?.email){
-         alert("Preencha o email do usuário");
-
-         return false;
-        }
-        if(!user?.address){
-         alert("Preencha o endereço do usuário");
-
-         return false;
-        }
-
-        return true;
-    }
-
+  
     const handleFetch = async () => {
         setLoading(true);
         try {

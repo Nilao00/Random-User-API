@@ -98,6 +98,18 @@ namespace RandomUserApi.Controllers
         {
             try
             {
+                if(newUser.Name == "")
+                {
+                    return BadRequest(new { message = "Preencha o nome do usuário." });
+                }
+                if(newUser.Email == "")
+                {
+                    return BadRequest(new { message = "Preencha o email do usuário." });
+                }
+                if(newUser.Address == "")
+                {
+                    return BadRequest(new { message = "Preencha o endereço do usuário." });
+                }
                 _context.Users.Add(newUser);
                 await _context.SaveChangesAsync();
 
@@ -118,6 +130,18 @@ namespace RandomUserApi.Controllers
 
             try
             {
+                if(updatedUser.Name == "")
+                {
+                    return BadRequest(new { message = "Preencha o nome do usuário." });
+                }
+                if(updatedUser.Email == "")
+                {
+                    return BadRequest(new { message = "Preencha o email do usuário." });
+                }
+                if(updatedUser.Address == "")
+                {
+                    return BadRequest(new { message = "Preencha o endereço do usuário." });
+                }
                 var user = await _context.Users.FindAsync(id);
 
                 if (user == null)
