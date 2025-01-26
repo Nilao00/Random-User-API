@@ -50,7 +50,7 @@ const UsersList = () => {
               setUsers((prev) => [...prev, createdUser.data]);
               handleCloseModal();            
           }
-        } catch (error) {
+        } catch (error:any) {
           if(error?.response?.status === 400) {
             alert(error?.response?.data?.message);            
           }
