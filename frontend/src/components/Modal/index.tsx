@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { removeCaracterNumber } from '../../utils/removeCaracterNumber';
 import { User } from '../../types/User';
 import { 
     Modal,
@@ -51,7 +52,7 @@ const ModalComponent = ({
                   <Label>Telefone:</Label>
                   <Input
                     type="tel"
-                    value={newUser.phone}
+                    value={removeCaracterNumber(newUser.phone)}
                     maxLength={13}
                     onChange={(e) => setNewUser({ ...newUser, phone: e.target.value })}
                   />
@@ -67,7 +68,7 @@ const ModalComponent = ({
                       {loading ? 'Salvando...' : 'Salvar'}
                     </Button>
                     <Button onClick={handleCloseModal} style={{ marginLeft: '10px' }}>
-                      Cancelar
+                      Fechar
                     </Button>
                   </div>
                 </ModalContent>
