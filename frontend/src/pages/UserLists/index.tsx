@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { debounce, set } from 'lodash';
+import { debounce } from 'lodash';
 import UserCard from '../../components/UserCard';
 import { User } from '../../types/User';
 import { useModal } from '../../hooks/useModal';
